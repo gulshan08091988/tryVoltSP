@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vwap-loadgen-config
+  namespace: default
+data:
+  VOLTDB_SVC_ADDR: "volt-vwap-voltdb-cluster-client.volt.svc.cluster.local:21212"
+  KAFKA_BROKER_ADDR: "redpanda-cluster.redpanda.svc.cluster.local:9093"
+  TOTAL_OPERATIONS: "2000000000"
+  UNIQUE_TICKERS: "200"
+  NUM_CLIENTS: "1"
+  TPS: "2"

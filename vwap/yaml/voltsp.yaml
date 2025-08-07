@@ -1,0 +1,23 @@
+resources:
+  limits:
+    cpu: 2
+    memory: 2G
+  requests:
+    cpu: 2
+    memory: 2G
+
+streaming:
+  pipeline:
+    className: com.voltactivedata.vwapdemo.voltsp.ReadFromKafkaAndSendToVoltTickers
+
+    configuration:
+      sink:
+        voltdb-procedure:
+          servers: volt-vwap-voltdb-cluster-client.volt.svc.cluster.local:21212
+          procedureName: ReportTickSessionAnchor
+      source:
+        kafka:
+          topicNames: "ticker-data"
+          bootstrapServers: "redpanda-cluster.redpanda.svc.cluster.local:9093"
+          groupId: "1"
+
