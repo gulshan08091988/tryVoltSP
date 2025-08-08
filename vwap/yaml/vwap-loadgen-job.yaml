@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   backoffLimit: 3
-  ttlSecondsAfterFinished: 180 # # Job and its Pods automatically deleted 180 seconds after completion.
+  ttlSecondsAfterFinished: 180
   template:
     spec:
       restartPolicy: Never
@@ -18,13 +18,14 @@ spec:
             - "/app/volt-vwap-fixed.jar"
             - "com.voltactivedata.vwapdemo.client.DemoUpdatedRandomTickers"
             - "$(VOLTDB_SVC_ADDR)"
-            - "0"
+            - "$(SKIP_SOMETHING)"
             - "$(TOTAL_OPERATIONS)"
             - "$(TPS)"
             - "$(NUM_CLIENTS)"
-            - "0"
+            - "$(SKIP_SOMETHING)"
             - "/app/tickerData"
             - "$(KAFKA_BROKER_ADDR)"
           envFrom:
             - configMapRef:
                 name: vwap-loadgen-config
+

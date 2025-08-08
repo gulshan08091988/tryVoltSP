@@ -174,7 +174,7 @@ def main():
 
     # Use the same license file as for VoltDB core
     cwd = os.path.dirname(os.path.abspath(__file__))
-    default_license_path = os.path.join(cwd, "license", "license.xml")
+    default_license_path = os.path.join(cwd, "license", "sp_license.xml")
     license_xml_path = get_user_input(f"Enter path to VoltSP license XML file", default=default_license_path)
 
     cwd = os.path.dirname(os.path.abspath(__file__))
@@ -250,7 +250,7 @@ streaming:
         else:
             print(f"\nVoltSP Helm release '{pipeline_name}' does not exist. Proceeding with new installation.")
             install_voltsp_cmd = (
-                f"helm install {pipeline_name} voltdb/volt-streams "
+                f"helm install {pipeline_name} voltdb/volt-streams --version=1.4.0 "
                 f"--set-file streaming.licenseXMLFile={license_xml_path} "
                 f"--set-file streaming.voltapps={voltsp_jar_path} "
                 f"--values {temp_voltsp_values_path} " # Use the temporary, dynamically generated values file
