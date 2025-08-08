@@ -1,11 +1,10 @@
 
 This comprehensive README.md provides a detailed guide for setting up and deploying the VWAP (Volume Weighted Average Price) demo application on Google Kubernetes Engine (GKE) using VoltDB, VoltSP, and Redpanda.
 
-**VWAP Demo Deployment on GKE**
+VWAP Demo Deployment on GKE
 This repository contains Python scripts to automate the deployment of a Volume Weighted Average Price (VWAP) demo application on Google Kubernetes Engine (GKE). The demo leverages Redpanda as a Kafka-compatible streaming platform, VoltDB as the high-performance operational database, and VoltSP for streaming data processing.
 
-**Table of Contents
-**
+Table of Contents
 Overview
 
 Prerequisites
@@ -28,22 +27,22 @@ Monitoring and Verification
 
 Troubleshooting
 
-**Overview**
+Overview
 The VWAP demo simulates real-time stock trading data processing.
 
 The deployment process is orchestrated by a main Python script (tryVoltSP.py) which calls sub-scripts for each component:
 
-***tryVoltSP.py***: The primary entry point. Handles GKE cluster creation/selection and orchestrates the deployment of Redpanda, VoltDB, VoltSP, and the VWAP load generator.
+tryVoltSP.py: The primary entry point. Handles GKE cluster creation/selection and orchestrates the deployment of Redpanda, VoltDB, VoltSP, and the VWAP load generator.
 
-***vwap_setup.py***: Manages the deployment of the Redpanda cluster on GKE using Helm. It also configures the necessary Kafka topic (ticker-data).
+vwap_setup.py: Manages the deployment of the Redpanda cluster on GKE using Helm. It also configures the necessary Kafka topic (ticker-data).
 
-***voltdb_core_setup.py***: Installs and configures the VoltDB Core cluster using its Helm chart. It handles Docker registry secrets, VoltDB license, DDL, and application JAR deployment. It also inserts a dummy record to verify VoltDB connectivity.
+voltdb_core_setup.py: Installs and configures the VoltDB Core cluster using its Helm chart. It handles Docker registry secrets, VoltDB license, DDL, and application JAR deployment. It also inserts a dummy record to verify VoltDB connectivity.
 
-***voltsp_setup.py***: Deploys the VoltSP streaming pipeline, which reads data from Redpanda (Kafka) and writes it to VoltDB. This involves deploying a custom JAR and configuring the VoltSP application.
+voltsp_setup.py: Deploys the VoltSP streaming pipeline, which reads data from Redpanda (Kafka) and writes it to VoltDB. This involves deploying a custom JAR and configuring the VoltSP application.
 
-***vwap_loadgen_setup.py***: Deploys a Kubernetes Job that acts as a load generator, producing simulated ticker data into the Redpanda ticker-data topic.
+vwap_loadgen_setup.py: Deploys a Kubernetes Job that acts as a load generator, producing simulated ticker data into the Redpanda ticker-data topic.
 
-**Prerequisites**
+Prerequisites
 Before running the deployment scripts, ensure you have the following installed and configured:
 
 Google Cloud SDK (gcloud): Authenticated and configured with your GCP project.
@@ -76,7 +75,7 @@ VoltDB Application JAR: The compiled VoltDB application JAR (e.g., vwap_demo.jar
 
 VoltSP Kafka Reader Stream JAR: The compiled VoltSP application JAR for reading from Kafka. A placeholder vwap-demo-1.0-SNAPSHOT-voltsp-kafka-reader-stream.jar is expected at vwap/jars/vwap-demo-1.0-SNAPSHOT-voltsp-kafka-reader-stream.jar.
 
-**Directory Structure**
+Directory Structure
 The project has the following structure:
 
 tryvoltsp/
@@ -95,9 +94,7 @@ tryvoltsp/
     ├── voltdb_core_setup.py        # Script to deploy VoltDB Core
     ├── voltsp_setup.py             # Script to deploy VoltSP
     └── vwap_loadgen_setup.py       # Script to deploy VWAP Load Generator
-    
-**Deployment Steps**
-
+Deployment Steps
 Follow these steps to deploy the VWAP demo. The main script tryVoltSP.py will guide you through the process, prompting for necessary inputs.
 
 1. Initialize the GKE Cluster
